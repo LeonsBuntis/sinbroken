@@ -1,5 +1,5 @@
 // Require the necessary discord.js classes
-const { Client, Intents, Collection, GuildStickerManager, Permissions } = require('discord.js');
+const { Client, Intents, Collection, GuildStickerManager, Permissions, CategoryChannel } = require('discord.js');
 const config = require('./config.json');
 
 // Create a new client instance
@@ -27,7 +27,7 @@ client.on('interactionCreate', async interaction => {
 		if (!user) return await interaction.reply("Please input a discord username.");
 
 		// create the new channel under category TRIALS ( config.trialChannelCategory )
-		await guild.channels.fetch(config.test_trialChannelCategory)
+		await guild.channels.fetch(config.trialChannelCategory)
 			.then(category => {
 
 				//TODO: add trial and officers to the channel
@@ -61,4 +61,3 @@ client.on('interactionCreate', async interaction => {
 
 // Login to Discord with your client's token
 client.login(config.token);
-
