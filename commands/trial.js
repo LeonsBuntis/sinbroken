@@ -5,8 +5,9 @@ module.exports = {
     .setName('trial')
     .setDescription('Create text channel called trial-<name>, add <discordid> and officers to it.')
     .addStringOption(option => option.setName('name').setDescription('The Trial\'s ingame name.'))
-    .addUserOption(option => option.setName('discordname').setDescription('The Trial\'s discord username.')),
-    //.addRoleOption(option => option.setName('assigned_role').setDescription('The trial')) //TODO: Create a flag for if trial is another realm.
+    .addUserOption(option => option.setName('discordname').setDescription('The Trial\'s discord username.'))
+    .addBooleanOption(option => option.setName('outside').setDescription('Whether the trial is on the same realm or not.')),
+    //.addRoleOption(option => option.setName('assigned_role').setDescription('The trial')), //TODO: Create a flag for if trial is another realm.
     async execute(interaction) {
       if (!interaction.isCommand()) return;
       const { options, guild } = interaction;
@@ -15,11 +16,14 @@ module.exports = {
         await interaction.reply('Something went wrong with the options');
         return;
       }
-      
+
       const name = options.getString('name');
-      const user = options.getUser('discordname');
+      const user = options.getMember('discordname');
+      const outsideRealm = options.getBoolean('outside');
+      //const role = options.getRole('assigned_role');
       const channelName = 'trial-' + name;
 
+      if (!name) return await interaction.reply("Please input the trial's ingame name.");
       if (!user) return await interaction.reply("Please input a discord username.");
 
       // create the new channel under category TRIALS ( config.trialChannelCategory )
@@ -33,14 +37,11 @@ module.exports = {
           });
       }).catch(console.error);
 
-      // TODO: implement the check for outside realm or not
       // Add trial or trial (outside realm) based on what realm the trial is from.
-      const member = options.getMember('discordname');
-      await member.roles.add(config.trial_id);
+      await outsideRealm ? user.roles.add(config.trial_id_outside) : user.roles.add(config.trial_id);
 
-      // TODO: Change user nickname to ingame name.
       // Set nickname of the trial
-      await member.setNickname(name);
+      await user.setNickname(name);
 
       // Reply
       await interaction.reply(`Created new trial channel for ${user}(${name})`);
