@@ -1,8 +1,9 @@
+const trialTemplate = require("../assets/trial-template.js");
 const config = require("../config.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("trial")
+    .setName("trialcreate")
     .setDescription(
       "Create text channel called trial-<name>, add <discordid> and officers to it."
     )
@@ -13,7 +14,11 @@ module.exports = {
       option
         .setName("discordname")
         .setDescription("The Trial's discord username.")
+    )
+    .addStringOption((option) =>
+      option.setName("class").setDescription("The Trial's class.")
     ),
+
   async execute(interaction) {
     if (!interaction.isCommand()) return;
     const { options, guild } = interaction;
@@ -25,10 +30,16 @@ module.exports = {
 
     const name = options.getString("name");
     const user = options.getUser("discordname");
-    const channelName = "trial-" + name;
+    const pClass = options.getString("class");
+    const channelName = `${name}-${pClass}`;
 
     if (!user)
       return await interaction.reply("Please input a discord username.");
+
+    if (!name)
+      return await interaction.reply(
+        "Please input the players main character name."
+      );
 
     // Create the new channel under category TRIALS ( config.trialChannelCategory )
     await guild.channels
@@ -46,7 +57,7 @@ module.exports = {
             });
 
             channel.send(
-              `Welcome to Sinbreakers ${name} (${user}). We have now created and marked you as a trial. Please make sure to read up on the raid-info channel.`
+              trialTemplate.getWelcomeTemplate(user, guild.channels)
             );
 
             // Add trial or trial (outside realm) based on what realm the trial is from.
