@@ -60,7 +60,7 @@ module.exports = {
               trialTemplate.getWelcomeTemplate(user, guild.channels)
             );
 
-            // Add trial or trial (outside realm) based on what realm the trial is from.
+            // Add trial role
             const member = options.getMember("discordname");
             member.roles.add(config.trial_id);
 
