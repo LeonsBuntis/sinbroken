@@ -29,15 +29,12 @@ client.on("interactionCreate", async (button) => {
   if (!button.isButton()) return;
 
   let oldMsg = button.message.content;
-  console.log(oldMsg);
-  console.log(button.member.displayName);
   if (button.message.content.includes(`${button.member.displayName}`)) {
     oldMsg = button.message.content.replace(`${button.member.displayName}`, "");
   }
 
   switch (button.customId) {
     case "trial-accept":
-      console.log("accept");
       button.message.edit(
         oldMsg.replace("ACCEPT:", `ACCEPT: ${button.member.displayName} `)
       );
