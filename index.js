@@ -3,7 +3,9 @@
  */
 const { Client, Intents } = require("discord.js");
 const config = require("./config.json");
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+});
 const app = require("./core/app.js");
 
 client.once("ready", () => {
@@ -52,6 +54,24 @@ client.on("interactionCreate", async (button) => {
 
     default:
       return button.deferUpdate();
+  }
+});
+
+client.on("messageCreate", (message) => {
+  if (message.author.bot) return false;
+  console.log("listening");
+  if (Math.floor(Math.random() * 25) + 1 === 1) {
+    console.log("chance");
+    switch (Math.floor(Math.random() * 2) + 1) {
+      case 1:
+        return message.channel.send("<:1778_monkaW:897957671183990824>");
+      case 2:
+        return message.channel.send("<:kekw:844464583267319828> ");
+    }
+  }
+
+  if (message.content.includes("feral")) {
+    return message.channel.send("ew, ferals.. 🤮");
   }
 });
 
