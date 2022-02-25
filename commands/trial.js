@@ -21,11 +21,20 @@ module.exports = {
 
   async execute(interaction) {
     if (!interaction.isCommand()) return;
-    const { options, guild } = interaction;
+    const { options, guild, member } = interaction;
+
+    if (!member.roles.cache.has(config.officer_role_id)) {
+      return await interaction.reply({
+        content: "Insufficient permisison, dickbreaker",
+        ephemeral: true,
+      });
+    }
 
     if (!options) {
-      await interaction.reply("Something went wrong with the options");
-      return;
+      return await interaction.reply({
+        content: "Something went wrong with the options",
+        ephemeral: true,
+      });
     }
 
     const name = options.getString("name");
@@ -34,12 +43,16 @@ module.exports = {
     const channelName = `${name}-${pClass}`;
 
     if (!user)
-      return await interaction.reply("Please input a discord username.");
+      return await interaction.reply({
+        content: "Please input a discord username.",
+        ephemeral: true,
+      });
 
     if (!name)
-      return await interaction.reply(
-        "Please input the players main character name."
-      );
+      return await interaction.reply({
+        content: "Please input the players main character name.",
+        ephemeral: true,
+      });
 
     // Create the new channel under category TRIALS ( config.trialChannelCategory )
     await guild.channels

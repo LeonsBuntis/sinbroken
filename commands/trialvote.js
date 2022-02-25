@@ -1,6 +1,6 @@
 const config = require("../config.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
+const { MessageActionRow, MessageButton } = require("discord.js");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("trialvote")
@@ -10,20 +10,30 @@ module.exports = {
     ),
   async execute(interaction) {
     if (!interaction.isCommand()) return;
-    const { options, guild } = interaction;
+    const { options, guild, member } = interaction;
+
+    if (!member.roles.cache.has(config.officer_role_id)) {
+      return await interaction.reply({
+        content: "Insufficient permisison, dickbreaker",
+        ephemeral: true,
+      });
+    }
 
     if (!options) {
-      await interaction.reply("Something went wrong with the options");
-      return;
+      return await interaction.reply({
+        content: "Something went wrong with the options",
+        ephemeral: true,
+      });
     }
 
     const name = options.getString("name");
     const channelName = `vote-${name}`;
 
     if (!name)
-      return await interaction.reply(
-        "Please input the players main character name."
-      );
+      return await interaction.reply({
+        content: "Please input the players main character name.",
+        ephemeral: true,
+      });
 
     // Create the new channel under category VOTE ( config.activeVotesCategory )
     await guild.channels
