@@ -8,6 +8,8 @@ const config = require("../config.json");
 // Functions
 module.exports = {
   async start(client) {
+    // Disable scheduler - Blizz API threshhold is a problem
+    return;
     const everyMinute = 1 * 60 * 1000;
     // const everyFifthMinute = 1 * 60 * 1000;
     const clientKey = config["blizzard-client"];
