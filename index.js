@@ -10,6 +10,7 @@ const app = require("./core/app.js");
 
 client.once("ready", () => {
   app.registerCommands(client);
+  app._scheduler_start(client);
 });
 
 client.on("interactionCreate", async (interaction) => {
@@ -64,7 +65,7 @@ client.on("messageCreate", (message) => {
       case 1:
         return message.channel.send("<:1778_monkaW:897957671183990824>");
       case 2:
-        return message.channel.send("<:kekw:844464583267319828> ");
+        return message.channel.send("<:kekw:844464583267319828>");
     }
   }
 
