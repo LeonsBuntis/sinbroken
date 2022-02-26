@@ -12,7 +12,7 @@ module.exports = {
     if (!interaction.isCommand()) return;
     const { options, guild, member } = interaction;
 
-    if (!member.roles.cache.has(config.recruiter_role_id)) {
+    if (!member.roles.cache.has(config.gm_role_id)) {
       return await interaction.reply({
         content: "Insufficient permisison, dickbreaker",
         ephemeral: true,

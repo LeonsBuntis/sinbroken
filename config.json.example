@@ -7,6 +7,7 @@
     "trial_id": "",
     "recruiter_role_id": "",
     "officer_role_id": "",
+    "gm_role_id": "",
     "allowed-ids": [],
     "general-channel": "",
     "blizzard-client": "",
