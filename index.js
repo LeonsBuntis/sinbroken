@@ -36,20 +36,22 @@ client.on("interactionCreate", async (button) => {
     oldMsg = button.message.content.replace(`${button.member.displayName}`, "");
   }
 
+  // TODO - Store in array to fx spaces bug
+
   switch (button.customId) {
     case "trial-accept":
       button.message.edit(
-        oldMsg.replace("ACCEPT:", `ACCEPT: ${button.member.displayName} `)
+        oldMsg.replace("ACCEPT:", `ACCEPT:${button.member.displayName}`)
       );
       return button.deferUpdate();
     case "trial-extend":
       button.message.edit(
-        oldMsg.replace("EXTEND:", `EXTEND: ${button.member.displayName} `)
+        oldMsg.replace("EXTEND:", `EXTEND:${button.member.displayName}`)
       );
       return button.deferUpdate();
     case "trial-reject":
       button.message.edit(
-        oldMsg.replace("REJECT:", `REJECT: ${button.member.displayName} `)
+        oldMsg.replace("REJECT:", `REJECT:${button.member.displayName}`)
       );
       return button.deferUpdate();
 
@@ -69,9 +71,7 @@ client.on("messageCreate", (message) => {
     }
   }
 
-  if (message.content.includes("feral")) {
-    return message.channel.send("ew, ferals.. 🤮");
-  }
+  // TODO - track announcement channel for raid updates & retrieve some fun info
 });
 
 client.login(config.token);
