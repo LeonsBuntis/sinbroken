@@ -62,7 +62,7 @@ client.on("interactionCreate", async (button) => {
 
 client.on("messageCreate", (message) => {
   if (message.author.bot) return false;
-  if (Math.floor(Math.random() * 45) + 1 === 1) {
+  if (Math.floor(Math.random() * 50) + 1 === 1) {
     switch (Math.floor(Math.random() * 2) + 1) {
       case 1:
         return message.channel.send("<:1778_monkaW:897957671183990824>");
