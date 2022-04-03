@@ -60,18 +60,4 @@ client.on("interactionCreate", async (button) => {
   }
 });
 
-client.on("messageCreate", (message) => {
-  if (message.author.bot) return false;
-  if (Math.floor(Math.random() * 50) + 1 === 1) {
-    switch (Math.floor(Math.random() * 2) + 1) {
-      case 1:
-        return message.channel.send("<:1778_monkaW:897957671183990824>");
-      case 2:
-        return message.channel.send("<:kekw:844464583267319828>");
-    }
-  }
-
-  // TODO - track announcement channel for raid updates & retrieve some fun info
-});
-
 client.login(config.token);
