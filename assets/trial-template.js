@@ -24,12 +24,13 @@ module.exports = {
     const info = `This channel is made so we can gather all the info about your trial and for the officers to review and being able to easily have a conversation with you :smiley:`;
     const questions = `:grey_question: **QUESTIONS**\n
         1. What's your ilvl and spec?\n
-        2. What's your previous raid experience? Historically and current tier.\n
-        3. Any warcraftlogs?\n
-        4. Please link your raiderIO page\n
-        5. Does our raid times fit you or can they be problematic? (18:30-21:30 Wed/Thu/Sun, 19-22 during summer)\n
-        6. Where are you from and how old are you?\n
-        7. Anything else you want to tell us about yourself to sell yourself in? Gaming related or otherwhise?`;
+        2. How many set pieces do you got?\n
+        3. What's your previous raid experience? Historically and current tier.\n
+        4. Any warcraftlogs?\n
+        5. Please link your raiderIO page\n
+        6. Does our raid times fit you or can they be problematic? (18:30-21:30 Wed/Thu/Sun, 19-22 during summer)\n
+        7. Where are you from and how old are you?\n
+        8. Anything else you want to tell us about yourself to sell yourself in? Gaming related or otherwhise?`;
     const guildInfo = `:information_source: **DISCORD CHANNELS**\n
         ${raidInfo} - Contains need-to-know information about raids.\n
         ${raidRules} - The rules and required addons we have for raiding with us.\n

@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const music = require("@koenie06/discord.js-music");
+const music = require("sinbroken-music");
 const { MessageEmbed } = require("discord.js");
 
 module.exports = {

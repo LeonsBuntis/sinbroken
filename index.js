@@ -3,6 +3,7 @@
  */
 const { Client, Intents } = require("discord.js");
 const config = require("./config.json");
+const app = require("./core/app.js");
 const client = new Client({
   intents: [
     Intents.FLAGS.GUILDS,
@@ -10,7 +11,6 @@ const client = new Client({
     Intents.FLAGS.GUILD_VOICE_STATES,
   ],
 });
-const app = require("./core/app.js");
 
 client.once("ready", () => {
   app.registerCommands(client);
@@ -32,6 +32,7 @@ client.on("interactionCreate", async (interaction) => {
   }
 });
 
+// TrialVote temp logic for voting
 client.on("interactionCreate", async (button) => {
   if (!button.isButton()) return;
 
@@ -40,8 +41,7 @@ client.on("interactionCreate", async (button) => {
     oldMsg = button.message.content.replace(`${button.member.displayName}`, "");
   }
 
-  // TODO - Store in array to fx spaces bug
-
+  // TODO - Store in array to fix spaces bug
   switch (button.customId) {
     case "trial-accept":
       button.message.edit(
