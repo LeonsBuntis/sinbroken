@@ -71,8 +71,8 @@ module.exports = {
         return this.skipCommand(interaction);
       case "repeat":
         return this.repeatCommand(interaction, options);
-      case "volume":
-        return this.volumeCommand(interaction, options);
+      // case "volume":
+      //   return this.volumeCommand(interaction, options);
       case "queue":
         return this.queueCommand(interaction);
       case "removefromqueue":
