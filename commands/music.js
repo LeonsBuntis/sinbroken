@@ -70,7 +70,7 @@ module.exports = {
       case "skip":
         return this.skipCommand(interaction);
       case "repeat":
-        return this.repeatCommand(interaction.options);
+        return this.repeatCommand(interaction, options);
       case "volume":
         return this.volumeCommand(interaction, options);
       case "queue":
