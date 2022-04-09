@@ -37,25 +37,25 @@ client.on("interactionCreate", async (button) => {
   if (!button.isButton()) return;
 
   let oldMsg = button.message.content;
-  if (button.message.content.includes(`${button.member.displayName}`)) {
-    oldMsg = button.message.content.replace(`${button.member.displayName}`, "");
+  if (oldMsg.includes(`${button.member.displayName}`)) {
+    oldMsg = oldMsg.replace(`${button.member.displayName} `, "");
   }
 
   // TODO - Store in array to fix spaces bug
   switch (button.customId) {
     case "trial-accept":
       button.message.edit(
-        oldMsg.replace("ACCEPT:", `ACCEPT:${button.member.displayName}`)
+        oldMsg.replace("ACCEPT:", `ACCEPT:${button.member.displayName} `)
       );
       return button.deferUpdate();
     case "trial-extend":
       button.message.edit(
-        oldMsg.replace("EXTEND:", `EXTEND:${button.member.displayName}`)
+        oldMsg.replace("EXTEND:", `EXTEND:${button.member.displayName} `)
       );
       return button.deferUpdate();
     case "trial-reject":
       button.message.edit(
-        oldMsg.replace("REJECT:", `REJECT:${button.member.displayName}`)
+        oldMsg.replace("REJECT:", `REJECT:${button.member.displayName} `)
       );
       return button.deferUpdate();
 
